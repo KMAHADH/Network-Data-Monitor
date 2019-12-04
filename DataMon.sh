@@ -19,6 +19,45 @@ intface1=Interface1
 
 intface2=Interface2
 
+if [ "$1" == "install" ]; then
+    ##Install in home folder!
+    echo ""
+    echo "Backing up your current Custom Aliases File..."
+    sleep 0.3
+    echo ""
+    cp ~/.bash_aliases ~/.bash_aliases_backup
+    echo 'File backed up as ".bash_aliases_backup"'
+    sleep 0.3
+    echo ""
+    echo "Copying the script to your home folder..."
+    sleep 0.3
+    echo ""
+    SCDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+    cp `echo $SCDIR`/DataMon.sh ~/
+    sleep 0.3
+    echo ""
+    echo "Setting up the script as an alias..."
+    sleep 0.3
+    echo ""
+    echo "alias data-usage='bash /home/`whoami`/DataMon.sh'" >> ~/.bash_aliases
+    sleep 0.3
+    echo ""
+    echo "Script Installed successfully!, You should now see a command as "data-usage" in your terminal, and do not need to explicitly locate and acll this script from now on!"
+    sleep 0.3
+    echo ""
+    echo "You might need to restart your computer or use the following command to refresh your current session:"
+    echo ""
+    echo ""source ~/.bash_aliases""
+    sleep 0.3
+    echo ""
+    echo "Bye!"
+    exit
+else
+    ##No Install!
+    echo ""
+fi
+
+
   ###################
  ## Default check ##
 ###################
@@ -128,3 +167,6 @@ echo -ne "|"
 echo ""
 echo "+---------------------------------------+"
 
+
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
