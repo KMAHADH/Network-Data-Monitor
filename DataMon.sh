@@ -34,6 +34,26 @@ else
     echo ::
 fi
 
+  ################
+ ## "ip" check ##
+################
+
+checkip=`command -v ip`
+
+if [ -z "$checkip" ]
+then
+#Check Failed!
+
+      det1='\e[91m"ip" doesnot exist on the system!\e[39m'
+      detall1='Please install "ip" on the system'
+      echo $det1
+      echo $detall1
+      exit
+else
+#Check Passed!
+
+echo -ne ""
+fi
 
   #######################
  ## For Data Received ##
