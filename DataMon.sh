@@ -15,9 +15,9 @@
  ##  In that order respectively!             ##
 ##############################################
 
-intface1=wlx503eaa447d9c
+intface1=Interface1
 
-intface2=wlx74da3858b8de
+intface2=Interface2
 
 
   ###################
