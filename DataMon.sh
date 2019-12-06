@@ -19,6 +19,72 @@ intface1=wlx503eaa447d9c
 
 intface2=wlx74da3858b8de
 
+
+  ###################
+ ## Default check ##
+###################
+
+if [ "$intface1" == "Interface1" ]; then
+    ##Check Failed!
+    echo ""
+    echo "You need to configure the script with your own network interfaces, first!"
+    echo "Refer to the script in your favourite text editor for this!"
+    exit
+else
+    ##Check Passed!
+    echo -ne ""
+fi
+
+  ################
+ ## "ip" check ##
+################
+
+checkip=`command -v ip`
+
+if [ -z "$checkip" ]
+then
+#Check Failed!
+
+      det1='\e[91m"ip" doesnot exist on the system!\e[39m'
+      detall1='Please install "ip" on the system'
+      echo $det1
+      echo $detall1
+      exit
+else
+#Check Passed!
+
+echo -ne ""
+fi
+
+
+function live_mon () {
+clear
+echo "Live monitoring the 1st interfaces' sent and received data..."
+echo 'Press "CTRL+C" to quit...'
+echo ""
+while [ 1 ]
+do
+devint=`echo $intface1`
+rec=`cat /proc/net/dev |  grep -n $devint | awk '{ print $2}'` && recGB=`echo 2k $rec 1000000000 /p | dc` && if [[ $recGB == .* ]]; then echo -ne "| Received: 0$recGB" GB" " ; else echo -ne "| Received: $recGB" GB" "; fi
+
+devint=`echo $intface1`
+send=`cat /proc/net/dev |  grep -n $devint | awk '{ print $10}'` && sendGB=`echo 2k $send 1000000000 /p | dc` && if [[ $sendGB == .* ]]; then echo -ne "| Sent: " 0$sendGB" GB"" |" ; else echo -ne "| Sent: $sendGB" GB" |"; fi
+
+  printf '\r'
+  sleep 1
+done
+printf '\n'
+}
+
+if [ "$1" == "monitor" ]; then
+live_mon
+else
+    ##No Install!
+echo ""
+fi
+
+
+
 if [ "$1" == "install" ]; then
     ##Install in home folder!
     echo ""
@@ -58,46 +124,10 @@ else
 fi
 
 
-  ###################
- ## Default check ##
-###################
-
-if [ "$intface1" == "Interface1" ]; then
-    ##Check Failed!
-    echo ""
-    echo "You need to configure the script with your own network interfaces, first!"
-    echo "Refer to the script in your favourite text editor for this!"
-    exit
-else
-    ##Check Passed!
-    echo ::
-fi
-
-  ################
- ## "ip" check ##
-################
-
-checkip=`command -v ip`
-
-if [ -z "$checkip" ]
-then
-#Check Failed!
-
-      det1='\e[91m"ip" doesnot exist on the system!\e[39m'
-      detall1='Please install "ip" on the system'
-      echo $det1
-      echo $detall1
-      exit
-else
-#Check Passed!
-
-echo -ne ""
-fi
 
   #######################
  ## For Data Received ##
 #######################
-echo ""
 echo "+---------------------------------------+"
 
 list=`ip link | awk -F: '$0 !~ "^[^0-9]"{print $2;getline}'`
@@ -165,7 +195,10 @@ echo -ne ""
 echo -ne "$EMPTY|"
 echo ""
 echo -ne "+---------------------------------------+"
-
+echo ""
 
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+
+
