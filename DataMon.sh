@@ -15,9 +15,9 @@
  ##  In that order respectively!             ##
 ##############################################
 
-intface1=Interface1
+intface1=wlx503eaa447d9c
 
-intface2=Interface2
+intface2=wlx74da3858b8de
 
 if [ "$1" == "install" ]; then
     ##Install in home folder!
@@ -160,12 +160,11 @@ horiz="`echo $foo | cut -c 4-5`"      # print the position
 
 
 let "arith = 41 - $horiz"
-
-printf %"$arith"s |tr " " " "
-
-echo -ne "|"
+EMPTY="$(printf '%*s' $arith)"
+echo -ne ""
+echo -ne "$EMPTY|"
 echo ""
-echo "+---------------------------------------+"
+echo -ne "+---------------------------------------+"
 
 
 
