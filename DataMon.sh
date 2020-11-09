@@ -108,7 +108,7 @@ if [ "$1" == "install" ]; then
     echo "alias data-usage='bash /home/`whoami`/DataMon.sh'" >> ~/.bash_aliases
     sleep 0.3
     echo ""
-    echo "Script Installed successfully!, You should now see a command as "data-usage" in your terminal, and do not need to explicitly locate and acll this script from now on!"
+    echo "Script Installed successfully!, You should now see a command as "data-usage" in your terminal, and do not need to explicitly locate and call this script from now on!"
     sleep 0.3
     echo ""
     echo "You might need to restart your computer or use the following command to refresh your current session:"
