@@ -1,7 +1,7 @@
 #/bin/bash
 
       ################################################################################
-     ##								               ##
+     ##								              ##
     ##  A BASH shell script to get your networked sent and received data in GB's  ##
    ##                                                                            ##
   ##  Created by Khwaja Mahad Haq (KMAHADH)                                     ##
